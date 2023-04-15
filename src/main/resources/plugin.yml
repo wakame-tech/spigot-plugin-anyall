@@ -1,0 +1,4 @@
+name: Anyall
+version: '${version}'
+main: tech.wakame.anyall.Anyall
+api-version: 1.19
