@@ -4,6 +4,7 @@ val kotlinVersion = "1.5.10"
 plugins {
     `kotlin-dsl`
     kotlin("jvm") version "1.5.10"
+    id("net.minecrell.plugin-yml.bukkit") version "0.3.0"
 }
 
 group = "tech.wakame"
@@ -26,11 +27,7 @@ tasks {
     }
 }
 
-//processResources {
-//    def props = [version: version]
-//    inputs.properties props
-//    filteringCharset 'UTF-8'
-//    filesMatching('plugin.yml') {
-//        expand props
-//    }
-//}
+bukkit {
+    main = "tech.wakame.anyall.AnyAll"
+    apiVersion = "1.19"
+}
