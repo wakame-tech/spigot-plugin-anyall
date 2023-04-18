@@ -4,7 +4,7 @@ val kotlinVersion = "1.5.10"
 plugins {
     `kotlin-dsl`
     kotlin("jvm") version "1.5.10"
-    id("net.minecrell.plugin-yml.bukkit") version "0.3.0"
+    id("com.github.johnrengelman.shadow") version "7.0.0"
 }
 
 group = "tech.wakame"
@@ -18,16 +18,29 @@ repositories {
 }
 
 dependencies {
+    api(kotlin("stdlib"))
+    api(kotlin("reflect"))
+    implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")
     compileOnly("org.spigotmc:spigot-api:$spigotVersion")
 }
 
 tasks {
-    compileKotlin {
-        kotlinOptions.jvmTarget = "16"
+    processResources {
+        filesMatching("plugin.yml") {
+            expand("version" to project.version)
+            expand("main" to "tech.wakame.anyall.AnyallKt")
+        }
     }
-}
 
-bukkit {
-    main = "tech.wakame.anyall.AnyAll"
-    apiVersion = "1.19"
+    compileJava {
+        options.release.set(17)
+    }
+
+    compileKotlin {
+        kotlinOptions.jvmTarget = "17"
+    }
+
+    shadowJar {
+        archiveClassifier.set("plugin")
+    }
 }

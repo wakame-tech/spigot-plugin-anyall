@@ -1,0 +1,4 @@
+name: anyall
+main: tech.wakame.anyall.Anyall
+api-version: 1.19
+version: 1.0-SNAPSHOT

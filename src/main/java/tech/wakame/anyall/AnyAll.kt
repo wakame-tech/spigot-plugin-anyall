@@ -6,10 +6,16 @@ import tech.wakame.anyall.handlers.BlockPlaceHandler
 import tech.wakame.anyall.handlers.WarnDurabilityLowToolsHandler
 
 class Anyall : JavaPlugin() {
+    private val handlers = arrayOf(
+        BlockBreakHandler(),
+        BlockPlaceHandler(),
+        WarnDurabilityLowToolsHandler(),
+    )
+
     override fun onEnable() {
-        server.pluginManager.registerEvents(BlockBreakHandler(), this)
-        server.pluginManager.registerEvents(BlockPlaceHandler(), this)
-        server.pluginManager.registerEvents(WarnDurabilityLowToolsHandler(), this)
+        handlers.forEach {
+            server.pluginManager.registerEvents(it, this)
+        }
     }
 
     override fun onDisable() {}
