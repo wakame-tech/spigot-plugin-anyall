@@ -1,0 +1,7 @@
+version: "3"
+services:
+  gradle:
+    image: "gradle:jdk17"
+    working_dir: /usr/project
+    volumes:
+      - .:/usr/project
