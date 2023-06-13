@@ -5,6 +5,7 @@ import org.bukkit.block.Block
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.block.BlockBreakEvent
+import tech.wakame.anyall.Anyall
 
 val diffs = arrayOf(
     Triple(-1, -1, -1),
@@ -37,11 +38,11 @@ val diffs = arrayOf(
     Triple(1, 1, 1)
 )
 
-class BlockBreakHandler : Listener {
-    companion object {
-        const val LIMIT = 500
+class BlockBreakHandler(private val plugin: Anyall) : Listener {
+    private val limit: Int by lazy {
+        plugin.config.getInt("break_limit", 500)
     }
-
+    
     @EventHandler
     fun onBlockBreak(event: BlockBreakEvent) {
         val tool = event.player.inventory.itemInMainHand
@@ -59,7 +60,7 @@ class BlockBreakHandler : Listener {
         val dest = event.player.location
 
         fun blockBreak(target: Block) {
-            if (LIMIT < cnt || target.type.isAir)
+            if (limit < cnt || target.type.isAir)
                 return
             target.getDrops(tool).forEach {
                 target.world.dropItemNaturally(dest, it)

@@ -7,12 +7,14 @@ import tech.wakame.anyall.handlers.WarnDurabilityLowToolsHandler
 
 class Anyall : JavaPlugin() {
     private val handlers = arrayOf(
-        BlockBreakHandler(),
-        BlockPlaceHandler(),
-        WarnDurabilityLowToolsHandler(),
+        BlockBreakHandler(this),
+        BlockPlaceHandler(this),
+        WarnDurabilityLowToolsHandler(this),
     )
 
     override fun onEnable() {
+        saveDefaultConfig()
+
         handlers.forEach {
             server.pluginManager.registerEvents(it, this)
         }

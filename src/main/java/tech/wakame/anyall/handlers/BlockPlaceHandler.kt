@@ -6,11 +6,12 @@ import org.bukkit.block.BlockFace
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.block.BlockPlaceEvent
+import tech.wakame.anyall.Anyall
 import java.util.*
 
-class BlockPlaceHandler : Listener {
-    companion object {
-        const val LIMIT = 500
+class BlockPlaceHandler(private val plugin: Anyall) : Listener {
+    private val limit: Int by lazy {
+        plugin.config.getInt("place_limit", 500)
     }
 
     @EventHandler
@@ -25,7 +26,7 @@ class BlockPlaceHandler : Listener {
         queue.add(event.block)
 
         while (queue.isNotEmpty()) {
-            if (LIMIT < cnt)
+            if (limit < cnt)
                 return
 
             val target = queue.removeFirst()

@@ -1,0 +1,3 @@
+alert_threshold: 10
+break_limit: 500
+place_limit: 500
