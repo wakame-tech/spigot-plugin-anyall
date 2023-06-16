@@ -33,7 +33,7 @@ docker compose up -d
 
 ```
 cd <plugin/>
-docker compose run gradle gradle build
+docker compose run gradle gradle shadowJar
 ```
 
 ビルドが成功すれば `<plugin>/build/libs/<name>-<version>.jar` に実行ファイルが生成されます.
