@@ -19,4 +19,4 @@ jobs:
           prerelease: true
           title: "build ${{ github.sha }}"
           files: |
-            build/libs/*.jar
+            build/libs/*-plugin.jar
